@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Stage</title>
+    <link rel="stylesheet" href="http://localhost:5000/static/PreferenceSelection.css">
+    
+</head>
+
+    
+<body>
+    <script src="https://unpkg.com/htmx.org@1.9.9"> </script>
+    <script>
+        var link = document.createElement("link");
+        link.href = "../static/PreferenceSelection.css"; // Adjust the path as needed
+        link.type = "text/css";
+        link.rel = "stylesheet";
+        document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+        <script>
+           document.body.addEventListener('htmx:afterRequest', function(event) {
+    console.log('HTMX request finished. Response:', event.detail.xhr.responseText);
+    // If you have the URL in event.detail.url, use that. Otherwise, you can remove this if condition.
+
+        console.log('I was called today, my friends');
+        try {
+            var response = JSON.parse(event.detail.xhr.responseText);
+            var videoContainer = document.getElementById('video-container');
+            videoContainer.innerHTML = `
+                <video width="640" height="480" controls>
+                    <source src="${response.video1}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video width="640" height="480" controls>
+                    <source src="${response.video2}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
+            // Reload the video elements to update the source
+            videoContainer.querySelectorAll('video').forEach(video => video.load());
+        } catch (e) {
+            console.error('Error parsing JSON response:', e);
+        }
+    
+});
+
+
+            </script>
+    <div id="main-gui">
+        <section class="hero">
+            <div class="hero-container">
+                <h1>Select the better Action</h1>
+                <p>If you are unsure or don't want the robot to learn, select the appropriate buttons</p>
+            </div>
+        </section>
+
+        <div id="video-container">
+            <video id="video1" width="640" height="480" controls>
+                <source src="video1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <video id="video2" width="640" height="480" controls>
+                <source src="video2.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <button id="next-video" hx-get="/get_current_video_pair" hx-swap="none" hx-trigger="click" hx-target="#video-container">Next Video</button>
+        
+        
+        <div class="button-container">
+            <button id="buttonFarLeft" hx-post="/update_preference" hx-trigger="click" hx-vals='{"preference": 0}' hx-headers='{"Content-Type": "application/json"}' hx-after-settle="toggleButtonVisibility">Left video</button>
+            {% if config.allowTies %}
+            <button id="equalButton" hx-post="/update_preference" hx-trigger="click" hx-vals='{"preference": 0.5}' hx-headers='{"Content-Type": "application/json"}' hx-after-settle="toggleButtonVisibility">Equal</button>
+            {% endif %}
+            <button id="buttonRight" hx-post="/update_preference" hx-trigger="click" hx-vals='{"preference": 1}' hx-headers='{"Content-Type": "application/json"}' hx-after-settle="toggleButtonVisibility">Right video</button>
+        </div>
+        
+        
+        <div class="skipping-button-container">
+            {% if config.allowSkipping %}
+            <button id="skippingButton">Skip</button>
+            {% endif %}
+        </div>
+
+        <!-- Placeholder for editor toggle and range selector -->
+        {% if config.allowEditing %}
+        <button id="editorToggle">Show Editor</button>
+        <div class="video-range-selector">
+            <input type="range" min="0" max="10" value="0">
+            <input type="range" min="0" max="10" value="0">
+        </div>
+        {% endif %}
+
+
+        <div class="image-button-container">
+            <img id="changeUIBtn" src="../static/arrow.png" alt="Next Stage" />
+        </div>
+    </div>
+
+
+    
+</body>
+</html>

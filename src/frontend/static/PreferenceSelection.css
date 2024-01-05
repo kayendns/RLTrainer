@@ -1,0 +1,77 @@
+#main-gui {
+    font-family: 'Arial', sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1c1c1c;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.hero {
+    color: white;
+}
+
+.hero-container h1 {
+    font-size: 2em;
+}
+
+.hero-container p {
+    font-size: 1.2em;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+}
+
+video {
+    margin: 0 10px;
+}
+
+.button-container {
+    padding: 20px 0;
+}
+
+.button-container button {
+    margin: 0 20px;
+    padding: 80px 80px; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.skipping-button-container {
+    padding: 20px 0;
+    height: 10%;
+    text-align: center; 
+}
+
+.skipping-button-container button {
+    width: 35%;
+    padding: 20px 400px; 
+    background-color: gray; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px; 
+}
+
+.image-button-container img {
+    position: absolute;
+    top: 20px; 
+    right: 20px; 
+    width: 120px;
+    height: auto;
+}

@@ -1,0 +1,4 @@
+allowEditing: 'on'
+allowSkipping: 'on'
+allowTies: 'on'
+trajectories_folder: src/frontend/static

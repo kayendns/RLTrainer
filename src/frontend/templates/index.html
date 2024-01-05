@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RLHF GUI</title>
+    <link rel="stylesheet" href="../static/ModeSelection.css">
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+</head>
+<body>
+    <div id="welcome-screen" class="welcome-screen">
+        <h1>Welcome to the RLHF GUI</h1>
+        <form id="configForm" hx-post="/update-config" hx-trigger="change from:#configForm" hx-swap="none">
+            <div id="checkboxes">
+                <input type="checkbox" id="allowTies-checkbox" name="allowTies" {{'checked' if config['allowTies'] else '' }}/>
+                <label for="allowTies-checkbox">Allow ties</label>
+                <input type="checkbox" id="allowSkipping-checkbox" name="allowSkipping" {{'checked' if config['allowSkipping'] else '' }}/>
+                <label for="allowSkipping-checkbox">Allow skipping</label>
+                <input type="checkbox" id="allowEditing-checkbox" name="allowEditing" {{'checked' if config['allowEditing'] else '' }}/>
+                <label for="allowEditing-checkbox">Allow editing</label>                
+            </div>
+
+            <div class="image-button-container" hx-get="next-stage-url" hx-trigger="click" hx-target="body" hx-swap="outerHTML">
+                <img id="changeUIBtn" src="../static/arrow.png" alt="Next Stage" />
+            </div>
+            
+        </form>
+    </div>
+</body>
+</html>
