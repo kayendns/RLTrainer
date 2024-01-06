@@ -1,5 +1,7 @@
 # Reinforcement Learning Trainer
 
+![logo](https://github.com/kayendns/RLTrainer/blob/master/logo.png)
+
 This projects builds upon the [fancy_gym](https://github.com/ALRhub/fancy_gym) fork of OpenAI Gym and aims to provide an easy way for doing Reinforcement Learning from Human Feedback (RLHF) for RL agents.
 
 ## Structure
