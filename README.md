@@ -28,6 +28,9 @@ The last two steps may be done in one step (e.g. with DPO) or, more generally, f
 ### Reward Function Aggregation
 - Add support for:
     - DPO
+# Demo
+![demo](https://github.com/kayendns/RLTrainer/blob/master/demo.mkv)
+
 
 ### Training the Agent on the Preferences
 - Add support for:
